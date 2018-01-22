@@ -28,4 +28,4 @@ RUN gem install bundle
 
 COPY . /usr/src/app
 
-RUN bundle install --jobs 4 --retry 3 --deployment
+RUN bundle install --jobs 4 --retry 3
