@@ -1,0 +1,8 @@
+0000000000000000000000000000000000000000 22254aa5478d6bcaa591a9e53775e243466bf429 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516354543 +0100	commit: Flawed gocode
+22254aa5478d6bcaa591a9e53775e243466bf429 d14eb84bc8c820391b1c58a682905b190a7aab6c Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355483 +0100	commit: Initial commit
+d14eb84bc8c820391b1c58a682905b190a7aab6c 700d66789fa8a42b368fa890459b033e94d3216d Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355523 +0100	commit: gosimple
+700d66789fa8a42b368fa890459b033e94d3216d 329955e7e5078a4a2cb56c411fbcab4ff8506d0f Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355608 +0100	commit: errcheck
+329955e7e5078a4a2cb56c411fbcab4ff8506d0f 6456feb6134aee2a2615605274f7ed2d2d1ad84d Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355636 +0100	commit: go vet
+6456feb6134aee2a2615605274f7ed2d2d1ad84d 403a18b690008e2d19de34059227d8002d46b49b Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355737 +0100	commit: golint
+403a18b690008e2d19de34059227d8002d46b49b 63d374bc2c05b2f5d8a1133b34d943f9da858542 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355773 +0100	commit: unused
+63d374bc2c05b2f5d8a1133b34d943f9da858542 be3fb86b0177ab505c54104c7203c5f107053439 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355801 +0100	commit: unparam

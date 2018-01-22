@@ -1,0 +1,12 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - docker build -t barzahlen/pronto-golang .
+
+script:
+  - docker run --rm barzahlen/pronto-golang bundle exec rspec --format documentation --color
