@@ -1,5 +1,7 @@
 # Pronto runner for Golang
 
+[![Build Status](https://travis-ci.org/Barzahlen/pronto-golang.svg?branch=master)](https://travis-ci.org/Barzahlen/pronto-golang) [![RubyDoc](https://img.shields.io/badge/ruby-doc-green.svg)](http://rubydoc.info/github/Barzahlen/pronto-golang)
+
 Pronto runner for [Golang](https://golang.org) tools
 
 ## Tools
@@ -38,4 +40,8 @@ It is expected that it reponds to the following methods:
 | `command(file_path)` | Executes the command and receives the file_path to allow checking only the current file |
 | `base_command` | Returns the name/basic command that will be invoked. Is also used for enabling and disabling it via `.golangtools.yml` |
 | `installed?` | Returns true if the tool can be found, e.g. through `which #{base_command}` |
-| `parse_line(line)` | Receives the line returned from the tool for parsing. REturns `absolute_path`, `line_number`, `level`, `message text` |
+| `parse_line(line)` | Receives the line returned from the tool for parsing. Returns `absolute_path`, `line_number`, `level`, `message text` |
+
+## License
+
+[MIT](LICENSE)
