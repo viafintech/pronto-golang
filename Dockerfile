@@ -1,6 +1,6 @@
 FROM ruby:2.5
 
-ENV GOLANG_VERSION 1.9.3
+ENV GOLANG_VERSION 1.10
 
 RUN curl -sSL https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz \
                 | tar -v -C /usr/local -xz
