@@ -50,6 +50,8 @@ module Pronto
     end
 
     def process_line(patch, tool, output_line)
+      return nil if output_line =~ /^#/
+
       file_path, line_number, severity, message = tool.parse_line(output_line)
 
       patch.added_lines.each do |line|
