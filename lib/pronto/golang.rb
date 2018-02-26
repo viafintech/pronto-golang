@@ -71,7 +71,7 @@ module Pronto
       if @tools == nil
         config = dotconfig
 
-        @tools = GolangTools.constants.map do |constant|
+        @tools = GolangTools.constants.sort.map do |constant|
           tool = Object.const_get("Pronto::GolangTools::#{constant}").new
 
           if tool.installed? &&
