@@ -16,7 +16,7 @@ ENV GOPATH /go
 ENV PATH /go/bin:$PATH
 
 # gotools
-RUN go get -u github.com/golang/lint/golint
+RUN go get -u golang.org/x/lint/golint
 RUN go get -u honnef.co/go/tools/cmd/gosimple
 RUN go get -u honnef.co/go/tools/cmd/unused
 RUN go get -u mvdan.cc/unparam
