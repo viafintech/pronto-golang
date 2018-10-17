@@ -8,7 +8,7 @@ Pronto runner for [Golang](https://golang.org) tools
 
 |  Tool    | Install  |
 |----------|----------|
-| golint   | go get -u github.com/golang/lint/golint |
+| golint   | golang.org/x/lint/golint |
 | gosimple | go get -u honnef.co/go/tools/cmd/gosimple |
 | go vet   | - |
 | unused   | go get -u honnef.co/go/tools/cmd/unused |

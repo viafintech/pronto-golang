@@ -1,5 +1,5 @@
 init_gotools:
-	go get -u github.com/golang/lint/golint
+	go get -u golang.org/x/lint/golint
 	go get -u honnef.co/go/tools/cmd/gosimple
 	go get -u honnef.co/go/tools/cmd/unused
 	go get -u mvdan.cc/unparam
