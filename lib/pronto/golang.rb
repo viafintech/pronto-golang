@@ -57,7 +57,7 @@ module Pronto
 
       patch.added_lines.each do |line|
         if line_number.to_s == line.new_lineno.to_s &&
-           patch.new_file_full_path.to_s == file_path
+           patch.new_file_full_path.to_s == File.expand_path(file_path)
 
           return Message.new(
             file_path, line, severity, message, line.commit_sha, self.class
