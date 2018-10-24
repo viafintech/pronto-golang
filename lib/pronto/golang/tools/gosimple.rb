@@ -16,7 +16,7 @@ module Pronto
       def parse_line(line)
         file_path, line_number, _, message = line.split(':')
 
-        [file_path, line_number, :warning, message.strip]
+        return file_path, line_number, :warning, message.strip
       end
     end
   end
