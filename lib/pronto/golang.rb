@@ -53,14 +53,14 @@ module Pronto
     def process_line(patch, tool, output_line)
       return nil if output_line =~ /^#/
 
-      file_path, line_number, severity, message = tool.parse_line(output_line)
+      file_path, line_number, level, message = tool.parse_line(output_line)
 
       patch.added_lines.each do |line|
         if line_number.to_s == line.new_lineno.to_s &&
            patch.new_file_full_path.to_s == File.expand_path(file_path)
 
           return Message.new(
-            file_path, line, severity, message, line.commit_sha, self.class
+            file_path, line, level, message, line.commit_sha, self.class
           )
         end
       end

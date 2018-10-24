@@ -8,6 +8,7 @@ RSpec.shared_context 'test repo' do
   before { FileUtils.mv(git, dot_git) }
 
   let(:repo) { Pronto::Git::Repository.new('spec/fixtures/test.git') }
+
   after { FileUtils.mv(dot_git, git) }
 end
 
