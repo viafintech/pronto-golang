@@ -59,8 +59,10 @@ module Pronto
         if line_number.to_s == line.new_lineno.to_s &&
            patch.new_file_full_path.to_s == File.expand_path(file_path)
 
+          prefix_message = "#{tool.base_command}: #{message}"
+
           return Message.new(
-            file_path, line, level, message, line.commit_sha, self.class
+            file_path, line, level, prefix_message, line.commit_sha, self.class
           )
         end
       end
