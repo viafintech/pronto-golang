@@ -13,7 +13,6 @@ Pronto runner for [Golang](https://golang.org) tools
 | golint   | go get -u golang.org/x/lint/golint |
 | staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
 | unparam  | go get -u mvdan.cc/unparam |
-| unused   | go get -u honnef.co/go/tools/cmd/unused |
 
 ## Configuring tools
 
