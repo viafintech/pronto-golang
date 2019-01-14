@@ -1,16 +1,8 @@
 module Pronto
   module GolangTools
-    class Unused
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Unused < Base
+      def self.base_command
         'unused'
-      end
-
-      def installed?
-        `which #{base_command}` != ""
       end
 
       def parse_line(line)

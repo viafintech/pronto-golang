@@ -78,12 +78,13 @@ module Pronto
         config = dotconfig
 
         @tools = GolangTools.constants.sort.map do |constant|
-          tool = Object.const_get("Pronto::GolangTools::#{constant}").new
+          next if constant.to_s == 'Base'
 
-          if tool.installed? &&
-             (!config.key?('enabled_tools') ||
-              config['enabled_tools'].include?(tool.base_command))
+          tool_class = Object.const_get("Pronto::GolangTools::#{constant}")
 
+          tool = tool_class.new(config.fetch('tools').fetch(tool_class.base_command))
+
+          if tool.available?
             tool
           else
             nil
@@ -97,11 +98,15 @@ module Pronto
     def dotconfig
       file = find_file_upwards(CONFIG_FILE, Dir.pwd, use_home: true)
 
+      base = {
+        'tools' => {}
+      }
+
       if file
-        return YAML.load_file(file)
+        return base.merge(YAML.load_file(file))
       end
 
-      return {}
+      return base
     end
 
     def go_file?(path)

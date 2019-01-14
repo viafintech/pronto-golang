@@ -15,19 +15,21 @@ Pronto runner for [Golang](https://golang.org) tools
 | unparam  | go get -u mvdan.cc/unparam |
 | errcheck | go get -u github.com/kisielk/errcheck |
 
-## Enabling only certain tools
+## Configuring tools
 
-In order to only enable certain tools for execution it is possible to provide a `.golangtools.yml` file in the directory of execution.
+In order to configure certain tools for execution it is possible to provide a `.golangtools.yml` file in the directory of execution, any parent directory or `$HOME`.
 
 It looks as follows:
 ```yaml
-enabled_tools:
-  - errcheck
-  - gosimple
-  # ...
+tools:
+  <tool base command>:
+    enabled: true
+    parameters: './...'
 ```
 
-If the `enabled_tools` is available only the tools in the list will be executed. Note that the tool in question should match the value returned by `base_command`.
+If a tool is not listed here, it will automatically be enabled with the parameters `./...`.
+In order to specifically disable a tool, it has to be listed and `enabled` has to be set to `false`.
+If either of the keys is not provided the default will be assumed.
 
 ## Implementing additional tools
 
@@ -37,10 +39,13 @@ It is expected that it reponds to the following methods:
 
 | Method | Description |
 |--------|-------------|
+| `initialize` | Configuration hash from the `.golangtools.yml` config |
 | `command(file_path)` | Executes the command and receives the file_path to allow checking only the current file |
-| `base_command` | Returns the name/basic command that will be invoked. Is also used for enabling and disabling it via `.golangtools.yml` |
-| `installed?` | Returns true if the tool can be found, e.g. through `which #{base_command}` |
+| `self.base_command` | Returns the name/basic command that will be invoked. Is also used for enabling and disabling it via `.golangtools.yml` |
+| `available?` | Returns true if the tool can be found, e.g. through `which #{base_command}` |
 | `parse_line(line)` | Receives the line returned from the tool for parsing. Returns `absolute_path`, `line_number`, `level`, `message text` |
+
+It is possible to inherit from `Pronto::GolangTools::Base`, in which case only `self.base_command` and `parse_line` need to be implemented.
 
 ## License
 

@@ -1,16 +1,8 @@
 module Pronto
   module GolangTools
-    class Errcheck
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Errcheck < Base
+      def self.base_command
         'errcheck'
-      end
-
-      def installed?
-        `which #{base_command}` != ""
       end
 
       def parse_line(line)

@@ -1,16 +1,12 @@
 module Pronto
   module GolangTools
-    class Govet
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Govet < Base
+      def self.base_command
         'go vet'
       end
 
-      def installed?
-        true
+      def available?
+        enabled?
       end
 
       def parse_line(line)

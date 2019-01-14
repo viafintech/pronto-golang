@@ -1,0 +1,19 @@
+tools:
+  golint:
+    enabled: true
+    parameters: './...'
+  gosimple:
+    enabled: true
+    parameters: './...'
+  go vet:
+    enabled: true
+    parameters: './...'
+  unused:
+    enabled: true
+    parameters: './...'
+  unparam:
+    enabled: true
+    parameters: './...'
+  errcheck:
+    enabled: true
+    parameters: './...'

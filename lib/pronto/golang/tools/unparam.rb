@@ -1,16 +1,8 @@
 module Pronto
   module GolangTools
-    class Unparam
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Unparam < Base
+      def self.base_command
         'unparam'
-      end
-
-      def installed?
-        `which #{base_command}` != ""
       end
 
       def parse_line(line)

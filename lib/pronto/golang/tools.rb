@@ -3,6 +3,8 @@ module Pronto
   end
 end
 
+require_relative './tools/base'
+
 require_relative './tools/errcheck'
 require_relative './tools/golint'
 require_relative './tools/gosimple'

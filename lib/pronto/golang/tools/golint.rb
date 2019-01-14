@@ -1,16 +1,8 @@
 module Pronto
   module GolangTools
-    class Golint
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Golint < Base
+      def self.base_command
         'golint'
-      end
-
-      def installed?
-        `which #{base_command}` != ""
       end
 
       def parse_line(line)

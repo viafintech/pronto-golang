@@ -1,16 +1,8 @@
 module Pronto
   module GolangTools
-    class Gosimple
-      def command(file_path)
-        "#{base_command} ./..."
-      end
-
-      def base_command
+    class Gosimple < Base
+      def self.base_command
         'gosimple'
-      end
-
-      def installed?
-        `which #{base_command}` != ""
       end
 
       def parse_line(line)
