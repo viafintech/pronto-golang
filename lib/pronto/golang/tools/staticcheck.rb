@@ -1,8 +1,8 @@
 module Pronto
   module GolangTools
-    class Gosimple < Base
+    class Staticcheck < Base
       def self.base_command
-        'gosimple'
+        'staticcheck'
       end
 
       def parse_line(line)

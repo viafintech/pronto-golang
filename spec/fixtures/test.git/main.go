@@ -30,3 +30,7 @@ func ErrFunction() error {
 func withUnusedParam(prefix string, param string) string {
 	return prefix + param
 }
+
+func statiCheckUnused(value string) string {
+	return value
+}

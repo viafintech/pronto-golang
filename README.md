@@ -8,12 +8,12 @@ Pronto runner for [Golang](https://golang.org) tools
 
 |  Tool    | Install  |
 |----------|----------|
-| golint   | go get -u golang.org/x/lint/golint |
-| gosimple | go get -u honnef.co/go/tools/cmd/gosimple |
-| go vet   | - |
-| unused   | go get -u honnef.co/go/tools/cmd/unused |
-| unparam  | go get -u mvdan.cc/unparam |
 | errcheck | go get -u github.com/kisielk/errcheck |
+| go vet   | - |
+| golint   | go get -u golang.org/x/lint/golint |
+| staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
+| unparam  | go get -u mvdan.cc/unparam |
+| unused   | go get -u honnef.co/go/tools/cmd/unused |
 
 ## Configuring tools
 

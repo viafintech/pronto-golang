@@ -32,7 +32,7 @@ module Pronto
           result = golang.run
 
           aggregate_failures do
-            expect(result.count).to eq(6)
+            expect(result.count).to eq(12)
 
             # errcheck
             expect(result[0].path).to eq('spec/fixtures/test.git/main.go')
@@ -49,34 +49,39 @@ module Pronto
               .to eq('golint: exported function ExportedWithoutComment should have comment or be unexported')
             expect(result[1].commit_sha).to eq('63d374bc2c05b2f5d8a1133b34d943f9da858542')
             expect(result[1].runner).to eq(Pronto::Golang)
-            # gosimple
-            expect(result[2].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[2].line.new_lineno).to eq(12)
-            expect(result[2].level).to eq(:warning)
-            expect(result[2].msg).to eq('gosimple: should use for range instead of for { select {} } (S1000)')
-            expect(result[2].commit_sha).to eq('700d66789fa8a42b368fa890459b033e94d3216d')
-            expect(result[2].runner).to eq(Pronto::Golang)
             # go vet
+            expect(result[2].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[2].line.new_lineno).to eq(18)
+            expect(result[2].level).to eq(:warning)
+            expect(result[2].msg).to eq('go vet: unreachable code')
+            expect(result[2].commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
+            expect(result[2].runner).to eq(Pronto::Golang)
+            # staticcheck
             expect(result[3].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[3].line.new_lineno).to eq(18)
+            expect(result[3].line.new_lineno).to eq(9)
             expect(result[3].level).to eq(:warning)
-            expect(result[3].msg).to eq('go vet: unreachable code')
-            expect(result[3].commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
+            expect(result[3].msg)
+              .to eq(
+                'staticcheck: ' \
+                'withUnusedParam is a pure function but its return value is ignored (SA4017)'
+              )
+            expect(result[3].commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
             expect(result[3].runner).to eq(Pronto::Golang)
+
             # unparam
-            expect(result[4].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[4].line.new_lineno).to eq(30)
-            expect(result[4].level).to eq(:warning)
-            expect(result[4].msg).to eq('unparam: withUnusedParam - result 0 (string) is never used')
-            expect(result[4].commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
-            expect(result[4].runner).to eq(Pronto::Golang)
+            expect(result[9].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[9].line.new_lineno).to eq(30)
+            expect(result[9].level).to eq(:warning)
+            expect(result[9].msg).to eq('unparam: withUnusedParam - result 0 (string) is never used')
+            expect(result[9].commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
+            expect(result[9].runner).to eq(Pronto::Golang)
             # unused
-            expect(result[5].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[5].line.new_lineno).to eq(21)
-            expect(result[5].level).to eq(:warning)
-            expect(result[5].msg).to eq('unused: func ExportedWithoutComment is unused (U1000)')
-            expect(result[5].commit_sha).to eq('63d374bc2c05b2f5d8a1133b34d943f9da858542')
-            expect(result[5].runner).to eq(Pronto::Golang)
+            expect(result[10].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[10].line.new_lineno).to eq(21)
+            expect(result[10].level).to eq(:warning)
+            expect(result[10].msg).to eq('unused: func ExportedWithoutComment is unused (U1000)')
+            expect(result[10].commit_sha).to eq('63d374bc2c05b2f5d8a1133b34d943f9da858542')
+            expect(result[10].runner).to eq(Pronto::Golang)
           end
         end
       end

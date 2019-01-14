@@ -2,7 +2,7 @@ tools:
   golint:
     enabled: true
     parameters: './...'
-  gosimple:
+  staticcheck:
     enabled: true
     parameters: './...'
   go vet:

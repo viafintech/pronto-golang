@@ -6,3 +6,4 @@ d14eb84bc8c820391b1c58a682905b190a7aab6c 700d66789fa8a42b368fa890459b033e94d3216
 6456feb6134aee2a2615605274f7ed2d2d1ad84d 403a18b690008e2d19de34059227d8002d46b49b Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355737 +0100	commit: golint
 403a18b690008e2d19de34059227d8002d46b49b 63d374bc2c05b2f5d8a1133b34d943f9da858542 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355773 +0100	commit: unused
 63d374bc2c05b2f5d8a1133b34d943f9da858542 be3fb86b0177ab505c54104c7203c5f107053439 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355801 +0100	commit: unparam
+be3fb86b0177ab505c54104c7203c5f107053439 af7962dd7a0c37d40011c16dde92dd163e54d538 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1547462940 +0100	commit: staticcheck
