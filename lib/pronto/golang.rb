@@ -3,10 +3,13 @@ require 'pronto'
 require 'yaml'
 require 'shellwords'
 
+require_relative './golang/file_finder'
 require_relative './golang/tools'
 
 module Pronto
   class Golang < Runner
+    include ::Pronto::GolangSupport::FileFinder
+
     CONFIG_FILE = '.golangtools.yml'
     GOLANG_FILE_EXTENSIONS = ['.go'].freeze
 
@@ -92,8 +95,10 @@ module Pronto
     end
 
     def dotconfig
-      if File.exist?(CONFIG_FILE)
-        return YAML.load_file(CONFIG_FILE)
+      file = find_file_upwards(CONFIG_FILE, Dir.pwd, use_home: true)
+
+      if file
+        return YAML.load_file(file)
       end
 
       return {}
