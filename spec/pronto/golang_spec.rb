@@ -32,7 +32,7 @@ module Pronto
           result = golang.run
 
           aggregate_failures do
-            expect(result.count).to eq(10)
+            expect(result.count).to eq(9)
 
             # errcheck
             expect(result[0].path).to eq('spec/fixtures/test.git/main.go')
@@ -67,14 +67,6 @@ module Pronto
               )
             expect(result[3].commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
             expect(result[3].runner).to eq(Pronto::Golang)
-
-            # unparam
-            expect(result[9].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[9].line.new_lineno).to eq(30)
-            expect(result[9].level).to eq(:warning)
-            expect(result[9].msg).to eq('unparam: withUnusedParam - result 0 (string) is never used')
-            expect(result[9].commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
-            expect(result[9].runner).to eq(Pronto::Golang)
           end
         end
       end

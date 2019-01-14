@@ -18,7 +18,6 @@ ENV PATH /go/bin:$PATH
 # gotools
 RUN go get -u golang.org/x/lint/golint
 RUN go get -u honnef.co/go/tools/cmd/staticcheck
-RUN go get -u mvdan.cc/unparam
 RUN go get -u github.com/kisielk/errcheck
 
 RUN mkdir -p /usr/src/app

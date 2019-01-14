@@ -8,9 +8,6 @@ tools:
   go vet:
     enabled: true
     parameters: './...'
-  unparam:
-    enabled: true
-    parameters: './...'
   errcheck:
     enabled: true
     parameters: './...'
