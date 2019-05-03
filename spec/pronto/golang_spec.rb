@@ -32,7 +32,7 @@ module Pronto
           result = golang.run
 
           aggregate_failures do
-            expect(result.count).to eq(9)
+            expect(result.count).to eq(10)
 
             # golint
             expect(result[0].path).to eq('spec/fixtures/test.git/main.go')
