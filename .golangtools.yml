@@ -8,3 +8,6 @@ tools:
   go vet:
     enabled: true
     parameters: './...'
+  gosec:
+    enabled: true
+    parameters: './...'

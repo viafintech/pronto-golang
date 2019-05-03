@@ -34,20 +34,20 @@ module Pronto
           aggregate_failures do
             expect(result.count).to eq(9)
 
-            # errcheck
-            expect(result[0].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[0].line.new_lineno).to eq(18)
-            expect(result[0].level).to eq(:warning)
-            expect(result[0].msg).to eq('errcheck: Error response given but not checked')
-            expect(result[0].commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
-            expect(result[0].runner).to eq(Pronto::Golang)
             # golint
-            expect(result[1].path).to eq('spec/fixtures/test.git/main.go')
-            expect(result[1].line.new_lineno).to eq(21)
-            expect(result[1].level).to eq(:warning)
-            expect(result[1].msg)
+            expect(result[0].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[0].line.new_lineno).to eq(21)
+            expect(result[0].level).to eq(:warning)
+            expect(result[0].msg)
               .to eq('golint: exported function ExportedWithoutComment should have comment or be unexported')
-            expect(result[1].commit_sha).to eq('63d374bc2c05b2f5d8a1133b34d943f9da858542')
+            expect(result[0].commit_sha).to eq('63d374bc2c05b2f5d8a1133b34d943f9da858542')
+            expect(result[0].runner).to eq(Pronto::Golang)
+            # gosec
+            expect(result[1].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[1].line.new_lineno).to eq(18)
+            expect(result[1].level).to eq(:warning)
+            expect(result[1].msg).to eq('gosec: G104: Errors unhandled. (Confidence: HIGH, Severity: LOW)')
+            expect(result[1].commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
             expect(result[1].runner).to eq(Pronto::Golang)
             # go vet
             expect(result[2].path).to eq('spec/fixtures/test.git/main.go')

@@ -19,6 +19,9 @@ ENV PATH /go/bin:$PATH
 RUN go get -u golang.org/x/lint/golint
 RUN go get -u honnef.co/go/tools/cmd/staticcheck
 
+ENV GOSEC_VERSION 2.0.0
+RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin $GOSEC_VERSION
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 RUN gem install bundle

@@ -3,6 +3,7 @@ require 'pronto'
 require 'yaml'
 require 'shellwords'
 
+require_relative './golang/errors'
 require_relative './golang/file_finder'
 require_relative './golang/tools'
 
@@ -56,18 +57,22 @@ module Pronto
     def process_line(patch, tool, output_line)
       return nil if output_line =~ /^#/
 
-      file_path, line_number, level, message = tool.parse_line(output_line)
+      begin
+        file_path, line_number, level, message = tool.parse_line(output_line)
 
-      patch.added_lines.each do |line|
-        if line_number.to_s == line.new_lineno.to_s &&
-           patch.new_file_full_path.to_s == File.expand_path(file_path)
+        patch.added_lines.each do |line|
+          if line_number.to_s == line.new_lineno.to_s &&
+             patch.new_file_full_path.to_s == File.expand_path(file_path)
 
-          prefix_message = "#{tool.base_command}: #{message}"
+            prefix_message = "#{tool.base_command}: #{message}"
 
-          return Message.new(
-            file_path, line, level, prefix_message, line.commit_sha, self.class
-          )
+            return Message.new(
+              file_path, line, level, prefix_message, line.commit_sha, self.class
+            )
+          end
         end
+      rescue ::Pronto::GolangSupport::UnprocessableLine
+        # Do nothing if the line is not processable
       end
 
       return nil

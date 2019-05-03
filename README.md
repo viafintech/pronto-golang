@@ -10,6 +10,7 @@ Pronto runner for [Golang](https://golang.org) tools
 |----------|----------|
 | go vet   | - |
 | golint   | go get -u golang.org/x/lint/golint |
+| gosec    | See [Install instructions](https://github.com/securego/gosec#install) |
 | staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
 
 ## Configuring tools
