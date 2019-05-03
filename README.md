@@ -8,7 +8,6 @@ Pronto runner for [Golang](https://golang.org) tools
 
 |  Tool    | Install  |
 |----------|----------|
-| errcheck | go get -u github.com/kisielk/errcheck |
 | go vet   | - |
 | golint   | go get -u golang.org/x/lint/golint |
 | staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
