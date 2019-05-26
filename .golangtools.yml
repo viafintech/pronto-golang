@@ -11,3 +11,6 @@ tools:
   gosec:
     enabled: true
     parameters: './...'
+  golangci-lint:
+    enabled: false
+    parameters: 'run --print-issued-lines=false'

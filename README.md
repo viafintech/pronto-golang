@@ -12,6 +12,7 @@ Pronto runner for [Golang](https://golang.org) tools
 | golint   | go get -u golang.org/x/lint/golint |
 | gosec    | See [Install instructions](https://github.com/securego/gosec#install) |
 | staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
+| golangci-lint | go get -u github.com/golangci/golangci-lint/cmd/golangci-lint |
 
 ## Configuring tools
 
