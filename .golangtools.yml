@@ -12,5 +12,5 @@ tools:
     enabled: true
     parameters: './...'
   golangci-lint:
-    enabled: false
+    enabled: true
     parameters: 'run --print-issued-lines=false'
