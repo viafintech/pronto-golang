@@ -14,7 +14,7 @@ module Pronto
       end
 
       def command(file_path)
-        "#{base_command} #{parameters}"
+        "#{base_command} #{parameters} #{file_path}"
       end
 
       def parameters
