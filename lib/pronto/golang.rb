@@ -16,7 +16,6 @@ module Pronto
 
     def run
       return [] unless @patches
-
       @patches
         .select { |patch| valid_patch?(patch) }
         .map { |patch| inspect(patch) }
@@ -30,9 +29,8 @@ module Pronto
 
     def inspect(patch)
       escaped_path = Shellwords.escape(patch.new_file_full_path.to_s)
-
       messages = []
-
+      
       available_tools.each do |tool|
         Open3.popen3("#{tool.command(escaped_path)}") do |stdin, stdout, stderr, wait_thr|
           [stdout, stderr].each do |result_text|
@@ -86,7 +84,6 @@ module Pronto
           next if constant.to_s == 'Base'
 
           tool_class = Object.const_get("Pronto::GolangTools::#{constant}")
-
           tool = tool_class.new(config.fetch('tools').fetch(tool_class.base_command))
 
           if tool.available?
