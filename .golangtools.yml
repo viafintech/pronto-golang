@@ -1,16 +1,12 @@
 tools:
   golint:
     enabled: true
-    parameters: './...'
   staticcheck:
     enabled: true
-    parameters: './...'
   go vet:
     enabled: true
-    parameters: './...'
   gosec:
     enabled: true
-    parameters: './...'
   golangci-lint:
     enabled: true
     parameters: 'run --print-issued-lines=false'

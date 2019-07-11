@@ -44,7 +44,7 @@ module Pronto
             expect(result[5].runner).to eq(Pronto::Golang)
 
             # golint
-            expect(result[6].path).to eq('spec/fixtures/test.git/main.go')
+            expect(result[6].path).to eq('/usr/src/app/spec/fixtures/test.git/main.go')
             expect(result[6].line.new_lineno).to eq(21)
             expect(result[6].level).to eq(:warning)
             expect(result[6].msg)

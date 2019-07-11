@@ -18,7 +18,7 @@ module Pronto
       end
 
       def parameters
-        @config.fetch('parameters', './...') # Default to './...' if the key is not configured
+        @config['parameters']
       end
 
       def available?
@@ -30,7 +30,7 @@ module Pronto
       end
 
       def enabled?
-        @config.fetch('enabled', true) # Default to true if the key is not configured
+        !!@config['enabled']
       end
 
       def parse_line(line)
