@@ -14,11 +14,11 @@ module Pronto
       end
 
       def command(file_path)
-        "#{base_command} #{parameters}"
+        "#{base_command} #{parameters} #{file_path}"
       end
 
       def parameters
-        @config.fetch('parameters', './...') # Default to './...' if the key is not configured
+        @config.fetch('parameters', '') # Default to '' if the key is not configured
       end
 
       def available?

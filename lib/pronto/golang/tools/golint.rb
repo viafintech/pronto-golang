@@ -6,7 +6,12 @@ module Pronto
       end
 
       def parse_line(line)
-        file_path, line_number, _, message = line.split(':')
+        path, line_number, _, message = line.split(':')
+
+        absolute_path = Pathname.new(path)
+        working_directory = Pathname.new(Dir.pwd)
+
+        file_path = absolute_path.relative_path_from(working_directory).to_s
 
         return file_path, line_number, :warning, message.to_s.strip
       end

@@ -9,6 +9,10 @@ module Pronto
         'gosec'
       end
 
+      def command(file_path)
+        "#{base_command} #{parameters} #{File.dirname(file_path)}"
+      end
+
       def parse_line(line)
         # Accepts lines of the following format:
         #   [path_to_file:<line_number>] -
