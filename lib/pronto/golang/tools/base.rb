@@ -21,6 +21,10 @@ module Pronto
         @config.fetch('parameters', '') # Default to '' if the key is not configured
       end
 
+      def blacklisted_files_regexp
+        @regexp ||= Regexp.new(@config.fetch('blacklisted_files', '^(?!.*)$'))
+      end
+
       def available?
         installed? && enabled?
       end

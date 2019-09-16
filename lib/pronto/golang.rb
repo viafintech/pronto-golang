@@ -34,6 +34,12 @@ module Pronto
       messages = []
 
       available_tools.each do |tool|
+        # Skip the patch if the filepath is blacklisted in the 'blacklisted_files' config
+        # Note: this defaults to '.*' and therefore matches everything by default
+        if tool.blacklisted_files_regexp.match?(escaped_path)
+          next
+        end
+
         Open3.popen3("#{tool.command(escaped_path)}") do |stdin, stdout, stderr, wait_thr|
           [stdout, stderr].each do |result_text|
             while output_line = result_text.gets
@@ -42,8 +48,6 @@ module Pronto
               messages << process_line(patch, tool, output_line)
             end
           end
-
-
 
           while output_line = stderr.gets
             process_line(patch, tool, output_line)

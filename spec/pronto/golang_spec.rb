@@ -32,8 +32,6 @@ module Pronto
           result = golang.run
 
           aggregate_failures do
-            expect(result.count).to eq(16)
-
             # golangci-lint
             expect(result[5].path).to eq('spec/fixtures/test.git/main.go')
             expect(result[5].line.new_lineno).to eq(12)

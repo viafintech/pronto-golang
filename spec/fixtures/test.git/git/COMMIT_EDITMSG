@@ -1,1 +1,1 @@
-staticcheck
+Add ignorable code e.g. in vendor and ignore vendored code
