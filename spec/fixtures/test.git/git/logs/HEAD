@@ -7,3 +7,6 @@ d14eb84bc8c820391b1c58a682905b190a7aab6c 700d66789fa8a42b368fa890459b033e94d3216
 403a18b690008e2d19de34059227d8002d46b49b 63d374bc2c05b2f5d8a1133b34d943f9da858542 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355773 +0100	commit: unused
 63d374bc2c05b2f5d8a1133b34d943f9da858542 be3fb86b0177ab505c54104c7203c5f107053439 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1516355801 +0100	commit: unparam
 be3fb86b0177ab505c54104c7203c5f107053439 af7962dd7a0c37d40011c16dde92dd163e54d538 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1547462940 +0100	commit: staticcheck
+af7962dd7a0c37d40011c16dde92dd163e54d538 9ab46caf5220eb37365bafee992212d242607d2a Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617246 +0200	commit: Add ignorable code e.g. in vendor
+9ab46caf5220eb37365bafee992212d242607d2a 3d373a9e4e11d1bc03ed9fc71e27cfa1e6b4153f Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617623 +0200	commit: Add ignorable code e.g. in vendor and ignore vendored code
+3d373a9e4e11d1bc03ed9fc71e27cfa1e6b4153f ea76898bf4963341084a29e097e4ac5bbc86f048 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617694 +0200	commit: Add ignorable code e.g. in vendor and ignore vendored code

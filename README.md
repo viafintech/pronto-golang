@@ -23,12 +23,15 @@ It looks as follows:
 tools:
   <tool base command>:
     enabled: true
-    parameters: './...'
+    parameters: '-v'
+    blacklisted_files: '.*\/vendor\/.*'
 ```
 
-If a tool is not listed here, it will automatically be enabled with the parameters `./...`.
+If a tool is not listed here, it will automatically be enabled.
 In order to specifically disable a tool, it has to be listed and `enabled` has to be set to `false`.
 If either of the keys is not provided the default will be assumed.
+It is possible to pass specific parameters to the tool, which is executed with `<tool> <parameters> <file_path>`.
+If is also possible to skip handling specific files by providing a pattern in `blacklisted_files`, e.g. `'.*\/vendor\/.*'` to ignore vendor. It will check every file by default.
 
 ## Implementing additional tools
 

@@ -1,6 +1,7 @@
 tools:
   golint:
     enabled: true
+    blacklisted_files: '.*\/vendor\/.*'
   staticcheck:
     enabled: true
   go vet:
