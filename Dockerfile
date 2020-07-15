@@ -18,7 +18,8 @@ ENV PATH /go/bin:$PATH
 # gotools
 RUN go get -u golang.org/x/lint/golint
 RUN go get -u honnef.co/go/tools/cmd/staticcheck
-RUN go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+ENV GOLANGCI_LINT_VERSION v1.28.3
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin $GOLANGCI_LINT_VERSION
 
 ENV GOSEC_VERSION 2.0.0
 RUN curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $GOPATH/bin $GOSEC_VERSION
