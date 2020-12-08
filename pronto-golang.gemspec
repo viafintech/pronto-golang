@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version               = Pronto::GolangVersion::VERSION
   s.platform              = Gem::Platform::RUBY
   s.author                = 'Tobias Schoknecht'
-  s.email                 = 'tobias.schoknecht@barzahlen.de'
+  s.email                 = 'tobias.schoknecht@viafintech.com'
   s.homepage              = 'https://github.com/Barzahlen/pronto-golang'
   s.summary               = 'Pronto runner for golang tools'
 
