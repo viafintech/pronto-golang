@@ -1,6 +1,6 @@
 # Pronto runner for Golang
 
-[![Build Status](https://travis-ci.org/Barzahlen/pronto-golang.svg?branch=master)](https://travis-ci.org/Barzahlen/pronto-golang) [![RubyDoc](https://img.shields.io/badge/ruby-doc-green.svg)](http://rubydoc.info/github/Barzahlen/pronto-golang)
+![Build Status](https://github.com/viafintech/pronto-golang/actions/workflows/test.yml/badge.svg) [![RubyDoc](https://img.shields.io/badge/ruby-doc-green.svg)](http://rubydoc.info/github/Barzahlen/pronto-golang)
 
 Pronto runner for [Golang](https://golang.org) tools
 
