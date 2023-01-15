@@ -8,7 +8,9 @@ module Pronto
 
       # Accepts lines of the following format:
       #   [path_to_file:<line_number>] -
-      PATTERN = Regexp.new('^\[(\S+):(\d+)\] - (.+)')
+      GOSEC_LINE_PATTERN = Regexp.new('^\[(\S+):(\d+)\] - (.+)')
+
+      ANSI_COLOR_CODING_PATTERN = Regexp.new('\e\[\d+(;\d+)?m')
 
       def self.base_command
         'gosec'
@@ -19,7 +21,9 @@ module Pronto
       end
 
       def parse_line(line)
-        if !PATTERN.match(line)
+        line = line.gsub(ANSI_COLOR_CODING_PATTERN, '')
+
+        if !GOSEC_LINE_PATTERN.match(line)
           raise ::Pronto::GolangSupport::UnprocessableLine.new(line)
         end
 
