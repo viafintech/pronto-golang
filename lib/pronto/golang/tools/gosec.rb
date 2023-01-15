@@ -5,6 +5,11 @@ require_relative '../errors'
 module Pronto
   module GolangTools
     class Gosec < Base
+
+      # Accepts lines of the following format:
+      #   [path_to_file:<line_number>] -
+      PATTERN = Regexp.new('^\[(\S+):(\d+)\] - (.+)')
+
       def self.base_command
         'gosec'
       end
@@ -14,9 +19,7 @@ module Pronto
       end
 
       def parse_line(line)
-        # Accepts lines of the following format:
-        #   [path_to_file:<line_number>] -
-        if line !~ /^\[(\S+):(\d+)\] - (.+)/
+        if !PATTERN.match(line)
           raise ::Pronto::GolangSupport::UnprocessableLine.new(line)
         end
 
