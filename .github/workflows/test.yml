@@ -16,4 +16,4 @@ jobs:
       run: docker build -t pronto-golang .
 
     - name: Test
-      run: docker-compose run --rm -T pronto-golang bundle exec rspec --format documentation --color
+      run: docker run --rm pronto-golang bundle exec rspec --format documentation --color
