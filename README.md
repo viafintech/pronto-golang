@@ -1,6 +1,6 @@
 # Pronto runner for Golang
 
-[![Build Status](https://travis-ci.org/Barzahlen/pronto-golang.svg?branch=master)](https://travis-ci.org/Barzahlen/pronto-golang) [![RubyDoc](https://img.shields.io/badge/ruby-doc-green.svg)](http://rubydoc.info/github/Barzahlen/pronto-golang)
+![Build Status](https://github.com/viafintech/pronto-golang/actions/workflows/test.yml/badge.svg) [![RubyDoc](https://img.shields.io/badge/ruby-doc-green.svg)](http://rubydoc.info/github/Barzahlen/pronto-golang)
 
 Pronto runner for [Golang](https://golang.org) tools
 
@@ -9,9 +9,9 @@ Pronto runner for [Golang](https://golang.org) tools
 |  Tool    | Install  |
 |----------|----------|
 | go vet   | - |
-| golint   | go get -u golang.org/x/lint/golint |
-| gosec    | See [Install instructions](https://github.com/securego/gosec#install) |
-| staticcheck | go get -u honnef.co/go/tools/cmd/staticcheck |
+| golint   | go install golang.org/x/lint/golint@latest |
+| gosec    | go install github.com/securego/gosec/v2/cmd/gosec@v2.14.0 |
+| staticcheck | go install honnef.co/go/tools/cmd/staticcheck@latest |
 | golangci-lint | See [Install instructions](https://golangci-lint.run/usage/install/) |
 
 ## Configuring tools

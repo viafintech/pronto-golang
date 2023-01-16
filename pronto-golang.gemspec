@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.platform              = Gem::Platform::RUBY
   s.author                = 'Tobias Schoknecht'
   s.email                 = 'tobias.schoknecht@viafintech.com'
-  s.homepage              = 'https://github.com/Barzahlen/pronto-golang'
+  s.homepage              = 'https://github.com/viafintech/pronto-golang'
   s.summary               = 'Pronto runner for golang tools'
 
   s.licenses              = ['MIT']
@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.require_paths         = ['lib']
 
   s.add_runtime_dependency('pronto', '>= 0.9.0', '< 0.11.0')
-  s.add_development_dependency('rake', '~> 12.0')
-  s.add_development_dependency('rspec', '~> 3.8')
+  s.add_development_dependency('rake', '~> 13.0')
+  s.add_development_dependency('rspec', '~> 3.12')
 end

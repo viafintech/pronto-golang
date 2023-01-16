@@ -60,7 +60,7 @@ module Pronto
             expect(gosec.path).to eq('spec/fixtures/test.git/main.go')
             expect(gosec.line.new_lineno).to eq(18)
             expect(gosec.level).to eq(:warning)
-            expect(gosec.msg).to eq('gosec: G104: Errors unhandled. (Confidence: HIGH, Severity: LOW)')
+            expect(gosec.msg).to eq('gosec: G104 (CWE-703): Errors unhandled. (Confidence: HIGH, Severity: LOW)')
             expect(gosec.commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
             expect(gosec.runner).to eq(Pronto::Golang)
 
