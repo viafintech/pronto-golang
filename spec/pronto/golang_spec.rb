@@ -82,9 +82,10 @@ module Pronto
             expect(staticcheck.level).to eq(:warning)
             expect(staticcheck.msg)
               .to eq(
-                'staticcheck: ' \
-                'withUnusedParam is a pure function but its return value is ignored (SA4017)'
-              )
+                    'staticcheck: ' \
+                    "withUnusedParam doesn't have side effects and " \
+                    'its return value is ignored (SA4017)',
+                  )
             expect(staticcheck.commit_sha).to eq('be3fb86b0177ab505c54104c7203c5f107053439')
             expect(staticcheck.runner).to eq(Pronto::Golang)
           end
