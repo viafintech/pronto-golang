@@ -11,3 +11,4 @@ tools:
   golangci-lint:
     enabled: true
     parameters: 'run --print-issued-lines=false --out-format=line-number'
+    execution_directory: 'spec/fixtures/test.git'

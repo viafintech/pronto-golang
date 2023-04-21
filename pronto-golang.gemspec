@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files      = ['LICENSE', 'README.md']
   s.require_paths         = ['lib']
 
-  s.add_runtime_dependency('pronto', '>= 0.9.0', '< 0.11.0')
+  s.add_runtime_dependency('pronto', '>= 0.9.0', '< 0.11.1')
   s.add_development_dependency('rake', '~> 13.0')
   s.add_development_dependency('rspec', '~> 3.12')
 end

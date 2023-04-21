@@ -14,7 +14,8 @@ module Pronto
       end
 
       def command(file_path)
-        "#{base_command} #{parameters} #{file_path}"
+        directory = @config.fetch('execution_directory', '.')
+        "cd #{directory} && #{base_command} #{parameters} #{file_path}"
       end
 
       def parameters
@@ -35,6 +36,13 @@ module Pronto
 
       def enabled?
         @config.fetch('enabled', true) # Default to true if the key is not configured
+      end
+
+      # Supported options:
+      # - file
+      # - project
+      def execution_mode
+        'file'
       end
 
       def parse_line(line)

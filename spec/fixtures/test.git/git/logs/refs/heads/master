@@ -10,3 +10,4 @@ be3fb86b0177ab505c54104c7203c5f107053439 af7962dd7a0c37d40011c16dde92dd163e54d53
 af7962dd7a0c37d40011c16dde92dd163e54d538 9ab46caf5220eb37365bafee992212d242607d2a Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617246 +0200	commit: Add ignorable code e.g. in vendor
 9ab46caf5220eb37365bafee992212d242607d2a 3d373a9e4e11d1bc03ed9fc71e27cfa1e6b4153f Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617623 +0200	commit: Add ignorable code e.g. in vendor and ignore vendored code
 3d373a9e4e11d1bc03ed9fc71e27cfa1e6b4153f ea76898bf4963341084a29e097e4ac5bbc86f048 Tobias Schoknecht <tobias.schoknecht@barzahlen.de> 1568617694 +0200	commit: Add ignorable code e.g. in vendor and ignore vendored code
+ea76898bf4963341084a29e097e4ac5bbc86f048 519b2ac1b1696b91796932ebca965e706661618c Tobias Schoknecht <tobias.schoknecht@viafintech.com> 1682089007 +0200	commit: Add go.mod
