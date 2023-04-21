@@ -30,6 +30,14 @@ module Pronto
         .compact
     end
 
+    def valid_patch?(patch)
+      patch.additions > 0 && go_file?(patch.new_file_full_path)
+    end
+
+    def patch_file_path(patch)
+      return Shellwords.escape(patch.new_file_full_path.to_s)
+    end
+
     def run_tools_for_projects
       collected_findings = []
 
@@ -38,32 +46,10 @@ module Pronto
           next
         end
 
-        Open3.popen3("#{tool.command('')}") do |stdin, stdout, stderr, wait_thr|
-          [stdout, stderr].each do |result_text|
-            while output_line = result_text.gets
-              next if output_line.strip == 'exit status 1'
-
-              collected_findings << {
-                line: output_line,
-                tool: tool,
-              }
-            end
-          end
-
-          while output_line = stderr.gets
-            collected_findings << {
-              line: output_line,
-              tool: tool,
-            }
-          end
-        end
+        collected_findings += run_command(tool, tool.command(''))
       end
 
       return collected_findings
-    end
-
-    def patch_file_path(patch)
-      return Shellwords.escape(patch.new_file_full_path.to_s)
     end
 
     def run_tools_for_files(filepaths)
@@ -81,33 +67,37 @@ module Pronto
             next
           end
 
-          Open3.popen3("#{tool.command(filepath)}") do |stdin, stdout, stderr, wait_thr|
-            [stdout, stderr].each do |result_text|
-              while output_line = result_text.gets
-                next if output_line.strip == 'exit status 1'
-
-                collected_findings << {
-                  line: output_line,
-                  tool: tool,
-                }
-              end
-            end
-
-            while output_line = stderr.gets
-              collected_findings << {
-                line: output_line,
-                tool: tool,
-              }
-            end
-          end
+          collected_findings += run_command(tool, tool.command(filepath))
         end
       end
 
       return collected_findings
     end
 
-    def valid_patch?(patch)
-      patch.additions > 0 && go_file?(patch.new_file_full_path)
+    def run_command(tool, command)
+      collected_findings = []
+
+      Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
+        [stdout, stderr].each do |result_text|
+          while output_line = result_text.gets
+            next if output_line.strip == 'exit status 1'
+
+            collected_findings << {
+              line: output_line,
+              tool: tool,
+            }
+          end
+        end
+
+        while output_line = stderr.gets
+          collected_findings << {
+            line: output_line,
+            tool: tool,
+          }
+        end
+      end
+
+      return collected_findings
     end
 
     def inspect(patch, findings)
