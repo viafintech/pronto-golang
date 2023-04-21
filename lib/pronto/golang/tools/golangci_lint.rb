@@ -4,6 +4,10 @@ module Pronto
       def self.base_command
         'golangci-lint'
       end
+
+      def execution_mode
+        'project'
+      end
     end
   end
 end

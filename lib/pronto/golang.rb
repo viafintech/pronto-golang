@@ -17,42 +17,104 @@ module Pronto
     def run
       return [] unless @patches
 
-      @patches
-        .select { |patch| valid_patch?(patch) }
-        .map { |patch| inspect(patch) }
+      valid_patches = @patches.select { |patch| valid_patch?(patch) }
+      patch_file_paths = valid_patches.map { |patch| patch_file_path(patch) }
+
+      collected_findings = []
+      collected_findings += run_tools_for_projects
+      collected_findings += run_tools_for_files(patch_file_paths)
+
+      valid_patches
+        .map { |patch| inspect(patch, collected_findings) }
         .flatten
         .compact
+    end
+
+    def run_tools_for_projects
+      collected_findings = []
+
+      available_tools.each do |tool|
+        if tool.execution_mode != 'project'
+          next
+        end
+
+        Open3.popen3("#{tool.command('')}") do |stdin, stdout, stderr, wait_thr|
+          [stdout, stderr].each do |result_text|
+            while output_line = result_text.gets
+              next if output_line.strip == 'exit status 1'
+
+              collected_findings << {
+                line: output_line,
+                tool: tool,
+              }
+            end
+          end
+
+          while output_line = stderr.gets
+            collected_findings << {
+              line: output_line,
+              tool: tool,
+            }
+          end
+        end
+      end
+
+      return collected_findings
+    end
+
+    def patch_file_path(patch)
+      return Shellwords.escape(patch.new_file_full_path.to_s)
+    end
+
+    def run_tools_for_files(filepaths)
+      collected_findings = []
+
+      available_tools.each do |tool|
+        if tool.execution_mode != 'file'
+          next
+        end
+
+        filepaths.each do |filepath|
+          # Skip the patch if the filepath is blacklisted in the 'blacklisted_files' config
+          # Note: this defaults to '.*' and therefore matches everything by default
+          if tool.blacklisted_files_regexp.match?(filepath)
+            next
+          end
+
+          Open3.popen3("#{tool.command(filepath)}") do |stdin, stdout, stderr, wait_thr|
+            [stdout, stderr].each do |result_text|
+              while output_line = result_text.gets
+                next if output_line.strip == 'exit status 1'
+
+                collected_findings << {
+                  line: output_line,
+                  tool: tool,
+                }
+              end
+            end
+
+            while output_line = stderr.gets
+              collected_findings << {
+                line: output_line,
+                tool: tool,
+              }
+            end
+          end
+        end
+      end
+
+      return collected_findings
     end
 
     def valid_patch?(patch)
       patch.additions > 0 && go_file?(patch.new_file_full_path)
     end
 
-    def inspect(patch)
-      escaped_path = Shellwords.escape(patch.new_file_full_path.to_s)
-
+    def inspect(patch, findings)
       messages = []
 
-      available_tools.each do |tool|
-        # Skip the patch if the filepath is blacklisted in the 'blacklisted_files' config
-        # Note: this defaults to '.*' and therefore matches everything by default
-        if tool.blacklisted_files_regexp.match?(escaped_path)
-          next
-        end
-
-        Open3.popen3("#{tool.command(escaped_path)}") do |stdin, stdout, stderr, wait_thr|
-          [stdout, stderr].each do |result_text|
-            while output_line = result_text.gets
-              next if output_line.strip == 'exit status 1'
-
-              messages << process_line(patch, tool, output_line)
-            end
-          end
-
-          while output_line = stderr.gets
-            process_line(patch, tool, output_line)
-          end
-        end
+      findings.each do |finding|
+        messages << process_line(patch, finding[:tool], finding[:line])
       end
 
       return messages
