@@ -14,8 +14,11 @@ module Pronto
       end
 
       def command(file_path)
-        directory = @config.fetch('execution_directory', '.')
         "cd #{directory} && #{base_command} #{parameters} #{file_path}"
+      end
+
+      def directory
+        @directory ||= @config.fetch('execution_directory', '.')
       end
 
       def parameters
@@ -47,6 +50,8 @@ module Pronto
 
       def parse_line(line)
         file_path, line_number, _, message = line.split(':', 4)
+
+        file_path = File.join(directory, file_path)
 
         return file_path, line_number, :warning, message.to_s.strip
       end
