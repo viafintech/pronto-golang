@@ -1,8 +1,6 @@
 FROM ruby:2.7
 
-ENV GOLANG_VERSION 1.20.3
-
-COPY --from=golang:${GOLANG_VERSION}-alpine /usr/local/go/ /usr/local/go/
+COPY --from=golang:1.20.3-alpine /usr/local/go/ /usr/local/go/
 
 RUN apt-get update && \
     apt-get install -y cmake --no-install-recommends && \
