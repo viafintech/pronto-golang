@@ -2,8 +2,7 @@ FROM ruby:2.7
 
 ENV GOLANG_VERSION 1.20.3
 
-RUN curl -sSL https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz \
-                | tar -C /usr/local -xz
+COPY --from=golang:${GOLANG_VERSION}-alpine /usr/local/go/ /usr/local/go/
 
 RUN apt-get update && \
     apt-get install -y cmake --no-install-recommends && \
