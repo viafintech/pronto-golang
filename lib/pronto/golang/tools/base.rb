@@ -49,7 +49,20 @@ module Pronto
       end
 
       def parse_line(line)
-        file_path, line_number, _, message = line.split(':', 4)
+        elements = line.split(':')
+        file_path   = elements[0]
+        line_number = elements[1]
+
+        case elements.count
+        when 3
+          message = elements[-1]
+        else
+          if elements[2].strip =~ /^\d+$/
+            message = elements[3..].join(':')
+          else
+            message = elements[2..].join(':')
+          end
+        end
 
         dir = directory('')
         if dir != ''
