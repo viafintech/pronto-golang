@@ -54,6 +54,9 @@ module Pronto
         line_number = elements[1]
 
         case elements.count
+        when 2
+          line_number = '1'
+          message     = elements[1]
         when 3
           message = elements[-1]
         else

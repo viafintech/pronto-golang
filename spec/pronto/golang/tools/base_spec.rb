@@ -103,6 +103,10 @@ module Pronto
             values: ['spec/fixtures/test.git/main.go', '18', :warning, 'unreachable code'],
           },
           {
+            line:   'spec/fixtures/test.git/main.go: unreachable code',
+            values: ['spec/fixtures/test.git/main.go', '1', :warning, 'unreachable code'],
+          },
+          {
             line:   'spec/fixtures/test.git/main.go:18: something else',
             values: ['spec/fixtures/test.git/main.go', '18', :warning, 'something else'],
           },
