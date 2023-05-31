@@ -96,49 +96,74 @@ module Pronto
         end
       end
 
-      describe '#parse_line' do
+      describe '#process_output' do
         [
           {
-            line:   'spec/fixtures/test.git/main.go:18:2: unreachable code',
-            values: ['spec/fixtures/test.git/main.go', '18', :warning, 'unreachable code'],
+            output: 'spec/fixtures/test.git/main.go:18:2: unreachable code',
+            values: Pronto::GolangSupport::Output.new(
+                      'spec/fixtures/test.git/main.go',
+                      '18',
+                      :warning,
+                      'unreachable code',
+                    ),
           },
           {
-            line:   'spec/fixtures/test.git/main.go: unreachable code',
-            values: ['spec/fixtures/test.git/main.go', '1', :warning, 'unreachable code'],
+            output: 'spec/fixtures/test.git/main.go: unreachable code',
+            values: Pronto::GolangSupport::Output.new(
+                      'spec/fixtures/test.git/main.go',
+                      '1',
+                      :warning,
+                      'unreachable code',
+                    ),
           },
           {
-            line:   'spec/fixtures/test.git/main.go:18: something else',
-            values: ['spec/fixtures/test.git/main.go', '18', :warning, 'something else'],
+            output: 'spec/fixtures/test.git/main.go:18: something else',
+            values: Pronto::GolangSupport::Output.new(
+                      'spec/fixtures/test.git/main.go',
+                      '18',
+                      :warning,
+                      'something else',
+                    ),
           },
           {
-            line:   'main.go:21:40: Comment should end in a period (godot)',
-            values: ['main.go', '21', :warning, 'Comment should end in a period (godot)'],
+            output: 'main.go:21:40: Comment should end in a period (godot)',
+            values: Pronto::GolangSupport::Output.new(
+                      'main.go',
+                      '21',
+                      :warning,
+                      'Comment should end in a period (godot)',
+                    ),
           },
           {
-            line:   'long/line.go:21: line is 121 characters (lll)',
-            values: ['long/line.go', '21', :warning, 'line is 121 characters (lll)'],
+            output: 'long/line.go:21: line is 121 characters (lll)',
+            values: Pronto::GolangSupport::Output.new(
+                      'long/line.go',
+                      '21',
+                      :warning,
+                      'line is 121 characters (lll)',
+                    ),
           },
           {
-            line:   'long/line.go:21: S1000: should use for range instead of for { select {} }',
-            values: [
-              'long/line.go',
-              '21',
-              :warning,
-              'S1000: should use for range instead of for { select {} }',
-            ],
+            output: 'long/line.go:21: S1000: should use for range instead of for { select {} }',
+            values: Pronto::GolangSupport::Output.new(
+                      'long/line.go',
+                      '21',
+                      :warning,
+                      'S1000: should use for range instead of for { select {} }',
+                    ),
           },
           {
-            line:   'long/line.go:21:12: S1000: should use for range instead of for { select {} }',
-            values: [
-              'long/line.go',
-              '21',
-              :warning,
-              'S1000: should use for range instead of for { select {} }',
-            ],
+            output: 'long/line.go:21:12: S1000: should use for range instead of for { select {} }',
+            values: Pronto::GolangSupport::Output.new(
+                      'long/line.go',
+                      '21',
+                      :warning,
+                      'S1000: should use for range instead of for { select {} }',
+                    ),
           },
         ].each do |test_case|
-          it "parses line '#{test_case[:line]}' correctly" do
-            expect(base.parse_line(test_case[:line])).to eq(test_case[:values])
+          it "parses output '#{test_case[:output]}' correctly" do
+            expect(base.process_output(test_case[:output]).first).to eq(test_case[:values])
           end
         end
       end

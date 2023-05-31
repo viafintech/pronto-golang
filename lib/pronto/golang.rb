@@ -83,16 +83,16 @@ module Pronto
             next if output_line.strip == 'exit status 1'
 
             collected_findings << {
-              line: output_line,
-              tool: tool,
+              output: output_line,
+              tool:   tool,
             }
           end
         end
 
         while output_line = stderr.gets
           collected_findings << {
-            line: output_line,
-            tool: tool,
+            output: output_line,
+            tool:   tool,
           }
         end
       end
@@ -104,34 +104,43 @@ module Pronto
       messages = []
 
       findings.each do |finding|
-        messages << process_line(patch, finding[:tool], finding[:line])
+        messages += process_line(patch, finding[:tool], finding[:output])
       end
 
       return messages
     end
 
-    def process_line(patch, tool, output_line)
-      return nil if output_line =~ /^#/
+    def process_line(patch, tool, output)
+      return [] if output =~ /^#/
 
       begin
-        file_path, line_number, level, message = tool.parse_line(output_line)
+        messages = []
 
-        patch.added_lines.each do |line|
-          if line_number.to_s == line.new_lineno.to_s &&
-             patch.new_file_full_path.to_s == File.expand_path(file_path)
+        parsed_outputs = tool.process_output(output)
 
-            prefix_message = "#{tool.base_command}: #{message}"
+        parsed_outputs.each do |parsed_output|
+          patch.added_lines.each do |line|
 
-            return Message.new(
-              file_path, line, level, prefix_message, line.commit_sha, self.class
-            )
+            next if parsed_output.line_number.to_s != line.new_lineno.to_s ||
+                    patch.new_file_full_path.to_s != File.expand_path(parsed_output.file_path)
+
+            prefix_message = "#{tool.base_command}: #{parsed_output.message}"
+
+            messages << Message.new(
+                          parsed_output.file_path,
+                          line,
+                          parsed_output.level,
+                          prefix_message,
+                          line.commit_sha,
+                          self.class,
+                        )
           end
         end
       rescue ::Pronto::GolangSupport::UnprocessableLine
         # Do nothing if the line is not processable
       end
 
-      return nil
+      return messages
     end
 
     def available_tools

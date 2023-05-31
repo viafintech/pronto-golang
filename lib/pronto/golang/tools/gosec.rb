@@ -1,6 +1,7 @@
 require 'pathname'
 
 require_relative '../errors'
+require_relative '../output'
 
 module Pronto
   module GolangTools
@@ -20,7 +21,7 @@ module Pronto
         "#{base_command} #{parameters} #{File.dirname(file_path)}"
       end
 
-      def parse_line(line)
+      def process_output(line)
         line = line.gsub(ANSI_COLOR_CODING_PATTERN, '')
 
         if !GOSEC_LINE_PATTERN.match(line)
@@ -36,7 +37,9 @@ module Pronto
 
         file_path = absolute_path.relative_path_from(working_directory)
 
-        return file_path.to_s, line_number, :warning, message
+        return [
+          Pronto::GolangSupport::Output.new(file_path.to_s, line_number, :warning, message),
+        ]
       end
     end
   end
