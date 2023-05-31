@@ -1,3 +1,5 @@
+require_relative '../output'
+
 module Pronto
   module GolangTools
     class Staticcheck < Base
@@ -5,10 +7,12 @@ module Pronto
         'staticcheck'
       end
 
-      def parse_line(line)
-        file_path, line_number, _, message = line.split(':')
+      def process_output(output)
+        file_path, line_number, _, message = output.split(':')
 
-        return file_path, line_number, :warning, message.to_s.strip
+        return [
+          Pronto::GolangSupport::Output.new(file_path, line_number, :warning, message.to_s.strip),
+        ]
       end
     end
   end

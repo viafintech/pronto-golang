@@ -1,3 +1,5 @@
+require_relative '../output'
+
 module Pronto
   module GolangTools
     class Base
@@ -14,11 +16,15 @@ module Pronto
       end
 
       def command(file_path)
-        "cd #{directory} && #{base_command} #{parameters} #{file_path}"
+        "cd #{directory} && #{base_command} #{default_parameters} #{parameters} #{file_path}"
       end
 
       def directory(default = '.')
         @config.fetch('execution_directory', default)
+      end
+
+      def default_parameters
+        '' # blank, can be overwritten for tools
       end
 
       def parameters
@@ -48,8 +54,8 @@ module Pronto
         'file'
       end
 
-      def parse_line(line)
-        elements = line.split(':')
+      def process_output(output)
+        elements = output.split(':')
         file_path   = elements[0]
         line_number = elements[1]
 
@@ -72,7 +78,9 @@ module Pronto
           file_path = File.join(dir, file_path)
         end
 
-        return file_path, line_number, :warning, message.to_s.strip
+        return [
+          Pronto::GolangSupport::Output.new(file_path, line_number, :warning, message.to_s.strip),
+        ]
       end
     end
   end

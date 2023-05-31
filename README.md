@@ -45,7 +45,7 @@ It is expected that it reponds to the following methods:
 | `command(file_path)` | Executes the command and receives the file_path to allow checking only the current file |
 | `self.base_command` | Returns the name/basic command that will be invoked. Is also used for enabling and disabling it via `.golangtools.yml` |
 | `available?` | Returns true if the tool can be found, e.g. through `which #{base_command}` |
-| `parse_line(line)` | Receives the line returned from the tool for parsing. Returns `absolute_path`, `line_number`, `level`, `message text` |
+| `process_output(output)` | Receives the output returned from the tool for parsing. Returns an array of `Output` with `absolute_path`, `line_number`, `level`, `message text` |
 
 It is possible to inherit from `Pronto::GolangTools::Base`, in which case only `self.base_command` and `parse_line` need to be implemented.
 
