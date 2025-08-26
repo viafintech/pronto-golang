@@ -1,13 +1,13 @@
-FROM ruby:2.7
+FROM ruby:3.4
 
-ENV GOLANG_VERSION 1.20.3
+ENV GOLANG_VERSION 1.25.0
 
 RUN curl -sSL https://dl.google.com/go/go$GOLANG_VERSION.linux-amd64.tar.gz \
-                | tar -C /usr/local -xz
+  | tar -C /usr/local -xz
 
 RUN apt-get update && \
-    apt-get install -y cmake --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+  apt-get install -y cmake --no-install-recommends && \
+  rm -rf /var/lib/apt/lists/*
 
 ENV PATH /usr/local/go/bin:$PATH
 
@@ -18,10 +18,10 @@ ENV PATH /go/bin:$PATH
 # gotools
 RUN go install golang.org/x/lint/golint@latest
 RUN go install honnef.co/go/tools/cmd/staticcheck@latest
-ENV GOLANGCI_LINT_VERSION v1.52.2
+ENV GOLANGCI_LINT_VERSION v2.4.0
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin $GOLANGCI_LINT_VERSION
 
-ENV GOSEC_VERSION 2.14.0
+ENV GOSEC_VERSION 2.22.8
 RUN go install github.com/securego/gosec/v2/cmd/gosec@v$GOSEC_VERSION
 
 RUN mkdir -p /usr/src/app

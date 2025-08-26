@@ -9,12 +9,17 @@ module Pronto
         'golangci-lint'
       end
 
+      def initialize(config)
+        super(config)
+      end
+
       def execution_mode
         'project'
       end
 
       def default_parameters
-        'run --out-format=json'
+        # Supports golangci-lint v2
+        'run --output.json.path=stdout --show-stats=false --color=never'
       end
 
       def process_output(output)
