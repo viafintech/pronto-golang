@@ -21,7 +21,7 @@ RUN go install honnef.co/go/tools/cmd/staticcheck@latest
 ENV GOLANGCI_LINT_VERSION v2.4.0
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin $GOLANGCI_LINT_VERSION
 
-ENV GOSEC_VERSION 2.14.0
+ENV GOSEC_VERSION 2.22.8
 RUN go install github.com/securego/gosec/v2/cmd/gosec@v$GOSEC_VERSION
 
 RUN mkdir -p /usr/src/app

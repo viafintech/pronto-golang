@@ -10,7 +10,7 @@
 |----------|----------|
 | go vet   | - |
 | golint   | go install golang.org/x/lint/golint@latest |
-| gosec    | go install github.com/securego/gosec/v2/cmd/gosec@v2.14.0 |
+| gosec    | go install github.com/securego/gosec/v2/cmd/gosec@v2.22.8 |
 | staticcheck | go install honnef.co/go/tools/cmd/staticcheck@latest |
 | golangci-lint | See [Install instructions](https://golangci-lint.run/usage/install/) |
 
