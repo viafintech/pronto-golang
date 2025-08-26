@@ -39,7 +39,7 @@ module Pronto
             expect(golangci.line.new_lineno).to eq(12)
             expect(golangci.level).to eq(:warning)
             expect(golangci.msg)
-              .to eq('golangci-lint: S1000: should use for range instead of for { select {} } (gosimple)')
+              .to eq('golangci-lint: S1000: should use for range instead of for { select {} } (staticcheck)')
             expect(golangci.commit_sha).to eq('700d66789fa8a42b368fa890459b033e94d3216d')
             expect(golangci.runner).to eq(Pronto::Golang)
 
@@ -55,12 +55,12 @@ module Pronto
             expect(golint.runner).to eq(Pronto::Golang)
 
             # gosec
-            gosec = result.find { |r| r.msg =~ /^gosec: G104/ }
+            gosec = result.find { |r| r.msg =~ /^gosec:/ }
 
             expect(gosec.path).to eq('spec/fixtures/test.git/main.go')
             expect(gosec.line.new_lineno).to eq(18)
             expect(gosec.level).to eq(:warning)
-            expect(gosec.msg).to eq('gosec: G104 (CWE-703): Errors unhandled. (Confidence: HIGH, Severity: LOW)')
+            expect(gosec.msg).to eq('gosec: G104 (CWE-703): Errors unhandled (Confidence: HIGH, Severity: LOW)')
             expect(gosec.commit_sha).to eq('6456feb6134aee2a2615605274f7ed2d2d1ad84d')
             expect(gosec.runner).to eq(Pronto::Golang)
 

@@ -17,7 +17,7 @@ ENV PATH /go/bin:$PATH
 
 # gotools
 RUN go install golang.org/x/lint/golint@latest
-# RUN go install honnef.co/go/tools/cmd/staticcheck@latest
+RUN go install honnef.co/go/tools/cmd/staticcheck@latest
 ENV GOLANGCI_LINT_VERSION v2.4.0
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin $GOLANGCI_LINT_VERSION
 

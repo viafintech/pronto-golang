@@ -9,7 +9,7 @@ module Pronto
         'golangci-lint'
       end
 
-      def self.is_v2?
+      def is_v2?
         v2_command = "golangci-lint --version"
         Open3.popen3(v2_command) do |_stdin, stdout, _stderr, _wait_thr|
           return stdout.gets.include?('version 2')
@@ -17,7 +17,7 @@ module Pronto
       end
 
       def initialize(config)
-        @is_v2 = is_v2?
+        @is_v2 = self.is_v2?
         super(config)
       end
 
@@ -27,7 +27,7 @@ module Pronto
 
       def default_parameters
         # golangci lint v2 changed the json flags
-        if @is_v2?
+        if @is_v2
           return 'run --output.json.path=stdout --show-stats=false --color=never'
         else
           return 'run --out-format=json'
