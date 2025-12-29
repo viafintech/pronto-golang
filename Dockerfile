@@ -1,4 +1,4 @@
-FROM ruby:3.4
+FROM ruby:4.0
 
 ENV GOLANG_VERSION 1.25.0
 
