@@ -81,7 +81,7 @@ module Pronto
         [stdout, stderr].each do |result_text|
           while output_line = result_text.gets
             if ENV['PRONTO_GOLANG_DEBUG'] == 'true'
-              puts "Tool: #{tool.base_command} - Output: #{output_line}"
+              $stderr.puts "Tool: #{tool.base_command} - Output: #{output_line}"
             end
 
             next if output_line.strip == 'exit status 1'
