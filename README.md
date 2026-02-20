@@ -49,6 +49,10 @@ It is expected that it reponds to the following methods:
 
 It is possible to inherit from `Pronto::GolangTools::Base`, in which case only `self.base_command` and `parse_line` need to be implemented.
 
+## Debugging tool output
+
+In order to debug the configured tool output and parsing, it is possible to run pronto with the `PRONTO_GOLANG_DEBUG` environment variable set to `true`, e.g. `PRONTO_GOLANG_DEBUG=true pronto run`. This will print the output of the tool and the parsed messages to the console.
+
 ## License
 
 [MIT](LICENSE)

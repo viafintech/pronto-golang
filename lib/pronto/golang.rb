@@ -80,6 +80,10 @@ module Pronto
       Open3.popen3(command) do |stdin, stdout, stderr, wait_thr|
         [stdout, stderr].each do |result_text|
           while output_line = result_text.gets
+            if ENV['PRONTO_GOLANG_DEBUG'] == 'true'
+              puts "Tool: #{tool.base_command} - Output: #{output_line}"
+            end
+
             next if output_line.strip == 'exit status 1'
 
             collected_findings << {
@@ -87,13 +91,6 @@ module Pronto
               tool:   tool,
             }
           end
-        end
-
-        while output_line = stderr.gets
-          collected_findings << {
-            output: output_line,
-            tool:   tool,
-          }
         end
       end
 
